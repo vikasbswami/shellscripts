@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "Enter a name:\c"
 read fname
-if [ -c $fname ]
+if [ -b $fname ]
 then
-	echo "File is a character special file."
+	echo "File is a block file."
 else
-	echo "File is a non character special file."
+	echo "File is a non block file."
 fi
