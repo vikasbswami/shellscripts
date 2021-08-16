@@ -2,6 +2,14 @@
 echo "Enter username:\c"
 read logname
 
+grep "$logname" /etc/passwd > /dev/null
+if [ $? -eq 0 ]
+then
+	echo "Wait..."
+else
+	echo "User not found."
+fi
+
 time=0
 
 while true
