@@ -20,11 +20,19 @@ do
 		echo "$logname has logged in."
 		if [ $time -ne 0 ]
 		then
-			echo "$logname was $time minutes late in logging in."
+			if [ $time -gt 60 ]
+			then
+				min=`expr $time / 60`
+				sec=`expr $time % 60`
+				echo "$logname was $min minutes and $sec seconds late in logging in."
+			else
+				sec=$time
+				echo "$logname was $sec seconds late in logging in."
+			fi
 		fi
 		exit
 	else
 		time=`expr $time + 1`
-		sleep 60
+		sleep 1
 	fi
 done
