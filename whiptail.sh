@@ -1,5 +1,5 @@
 #!/bin/bash
-cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
+cmd=(whiptail --separate-output --checklist "Select options:" 22 76 16)
 options=(1 "Option 1" off
 2 "Option 2" off
 3 "Option 3" off
