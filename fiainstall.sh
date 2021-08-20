@@ -15,19 +15,47 @@ options=(
 12 "Inkscape" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
+clear
+
 checknet() {
+tput setaf 3
 echo "Checking Internet connectivity..."
-if [[ `ping -q -c 1 -W 1 www.googel.com >> /dev/null` ]]
+wget -q --tries=10 --timeout=20 -O - http://google.com >> /dev/null
+if [[ $? -eq 0 ]]
 then
-	echo "OK"
+	tput cup 0 34
+	tput setaf 2
+	echo "[OK!]"
+	tput sgr0
 else
-	echo "No Internet"
+	tput cup 0 34
+	tput setaf 1
+	echo "[No Internet. Exiting!]"
+	tput sgr0
 	exit
 fi
 }
-clear
 
-checknet()
+update() {
+	tput cup 1 0
+	tput setaf 3
+	echo "Updating packages..."
+	sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y
+	if [[ $? -eq 0 ]]
+	then
+		tput setaf 2
+		echo "[Done!]"
+		tput sgr0
+	else
+		tput setaf 1
+		echo "[Update Error. Exiting!]"
+		tput sgr0
+		exit
+	fi
+}
+
+checknet
+update
 
 for choice in $choices
 do
