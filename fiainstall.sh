@@ -2,7 +2,7 @@
 cmd=(whiptail --separate-output --checklist "Select apps to install:\n(Use ARROWs, TAB, SPACE and ENTER keys)" 22 56 10)
 options=(
 1 "VMWare Player" off
-2 "Virtual Box" off
+2 "VirtualBox" off
 3 "Google Chrome" off
 4 "Filezilla Client" off
 5 "Git" off
@@ -68,6 +68,7 @@ update() {
 install_vmware()
 {
 	echo "Installing VMWare Player..."
+	update
         sudo apt install build-essential linux-headers-`uname -r` -y
 	if [[ $? -ne 0 ]]
 	then
@@ -108,6 +109,36 @@ install_vmware()
 	fi
 }
 
+install_virtualbox() {
+	tput setaf 3
+	echo "Installing VirtualBox..."
+	sudo echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian focal contrib" | sudo tee /etc/apt/sources.list.d/test >> /dev/null
+	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+	sudo apt update
+	sudo apt install virtualbox-6.1
+	if [[ $? -ne 0 ]]
+	then
+		tput setaf 1
+                echo "VirtualBox cannot be Installed."
+                tput setaf 3
+                echo "Installing VirtualBox..."
+                tput cuu1
+                tput cuf 28
+                tput setaf 1
+                echo "[Failed.]"
+                return
+	else
+		tput setaf 3
+		echo "Installing VirtualBox..."
+		tput cuu1
+		tput cuf 25
+		tput setaf 2
+		echo "[Done!]"
+        	return
+	fi
+}
+
 checknet
 update
 
@@ -118,7 +149,7 @@ do
 		install_vmware 
 		;;
 	2)
-		echo "virtualbox"
+		install_virtualbox
 		;;
 	3)
 		echo "chrome"
