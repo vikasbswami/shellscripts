@@ -1,5 +1,5 @@
 #!/bin/bash
-cmd=(whiptail --separate-output --checklist "Select options:" 22 56 10)
+cmd=(whiptail --separate-output --checklist "Select apps to install:\n(Use ARROWs, TAB, SPACE and ENTER keys)" 22 56 10)
 options=(
 1 "VMWare" off
 2 "Virtual Box" off
@@ -14,7 +14,20 @@ options=(
 11 "Gimp" off
 12 "Inkscape" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+checknet() {
+echo "Checking Internet connectivity..."
+if [[ `ping -q -c 1 -W 1 www.googel.com >> /dev/null` ]]
+then
+	echo "OK"
+else
+	echo "No Internet"
+	exit
+fi
+}
 clear
+
+checknet()
 
 for choice in $choices
 do
