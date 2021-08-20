@@ -15,7 +15,7 @@ options=(
 12 "Inkscape" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
-mkdir fia_temp
+mkdir -p fia_temp
 cd fia_temp
 sudo whoami >> /dev/null
 clear
