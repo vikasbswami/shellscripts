@@ -78,7 +78,8 @@ install_vmware() {
 		echo "[Failed.]"
 		return
 	fi
-
+	tput setaf 3
+	echo "Downloading VMWare Player..."
 	wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://www.vmware.com/go/getplayer-linux
 	if [[ $? -ne 0 ]]; then
 		tput setaf 1
