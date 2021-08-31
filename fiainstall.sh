@@ -194,7 +194,7 @@ install_git() {
 		tput setaf 3
 		echo "Installing Git..."
 		tput cuu1
-		tput cuf 24
+		tput cuf 18
 		tput setaf 2
 		echo "[Done!]"
 		return		
@@ -204,7 +204,32 @@ install_git() {
 		tput setaf 3
 		echo "Installing Git..."
 		tput cuu1
-		tput cuf 24
+		tput cuf 18
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
+install_atom() {
+	tput setaf 3
+	echo "Installing Atom..."
+	sudo snap install atom --classic
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Atom..."
+		tput cuu1
+		tput cuf 19
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Atom cannot be Installed."
+		tput setaf 3
+		echo "Installing Atom..."
+		tput cuu1
+		tput cuf 19
 		tput setaf 1
 		echo "[Failed.]"
 		return
@@ -232,7 +257,7 @@ for choice in $choices; do
 		install_git
 		;;
 	6)
-		echo "atom"
+		install_atom
 		;;
 	7)
 		echo "ms code"
