@@ -81,17 +81,7 @@ install_vmware() {
 	tput setaf 3
 	echo "Downloading VMWare Player..."
 	wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://www.vmware.com/go/getplayer-linux
-	if [[ $? -ne 0 ]]; then
-		tput setaf 1
-		echo "VMWare Player cannot be downloaded."
-		tput setaf 3
-		echo "Installing VMWare Player..."
-		tput cuu1
-		tput cuf 28
-		tput setaf 1
-		echo "[Failed.]"
-		return
-	else
+	if [[ $? -eq 0 ]]; then
 		chmod +x getplayer-linux
 		sudo ./getplayer-linux --required --eulas-agreed
 		tput setaf 3
@@ -100,8 +90,17 @@ install_vmware() {
 		tput cuf 28
 		tput setaf 2
 		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "VMWare Player cannot be installed."
+		tput setaf 3
+		echo "Installing VMWare Player..."
+		tput cuu1
+		tput cuf 28
+		tput setaf 1
+		echo "[Failed.]"
 		return
-
 	fi
 }
 
@@ -113,23 +112,23 @@ install_virtualbox() {
 	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 	sudo apt update
 	sudo apt install virtualbox-6.1
-	if [[ $? -ne 0 ]]; then
-		tput setaf 1
-		echo "VirtualBox cannot be Installed."
-		tput setaf 3
-		echo "Installing VirtualBox..."
-		tput cuu1
-		tput cuf 28
-		tput setaf 1
-		echo "[Failed.]"
-		return
-	else
+	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing VirtualBox..."
 		tput cuu1
 		tput cuf 25
 		tput setaf 2
 		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "VirtualBox cannot be installed."
+		tput setaf 3
+		echo "Installing VirtualBox..."
+		tput cuu1
+		tput cuf 28
+		tput setaf 1
+		echo "[Failed.]"
 		return
 	fi
 }
@@ -139,17 +138,7 @@ install_chrome() {
 	echo "Downloading Google Chrome..."
 	tput init
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	if [[ $? -ne 0 ]]; then
-		tput setaf 1
-		echo "Google Chrome cannot be Downloaded."
-		tput setaf 3
-		echo "Installing Google Chrome..."
-		tput cuu1
-		tput cuf 28
-		tput setaf 1
-		echo "[Failed.]"
-		return
-	else
+	if [[ $? -eq 0 ]]; then
 		sudo dpkg -i google-chrome-stable_current_amd64.deb
 		sudo apt update && sudo apt install -f
 		tput setaf 3
@@ -158,6 +147,16 @@ install_chrome() {
 		tput cuf 28
 		tput setaf 2
 		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Google Chrome cannot be Installed."
+		tput setaf 3
+		echo "Installing Google Chrome..."
+		tput cuu1
+		tput cuf 28
+		tput setaf 1
+		echo "[Failed.]"
 		return
 	fi
 }
