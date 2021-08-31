@@ -355,6 +355,81 @@ install_vlc() {
 	fi
 }
 
+install_gparted() {
+	tput setaf 3
+	echo "Installing Gparted..."
+	sudo apt install gparted
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Gparted..."
+		tput cuu1
+		tput cuf 22
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Gparted cannot be Installed."
+		tput setaf 3
+		echo "Installing Gparted..."
+		tput cuu1
+		tput cuf 22
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
+install_gimp() {
+	tput setaf 3
+	echo "Installing Gimp..."
+	sudo apt install gimp
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Gimp..."
+		tput cuu1
+		tput cuf 19
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Gimp cannot be Installed."
+		tput setaf 3
+		echo "Installing Gimp..."
+		tput cuu1
+		tput cuf 19
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
+install_inkscape() {
+	tput setaf 3
+	echo "Installing Inkscape..."
+	sudo apt install inkscape
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Inkscape..."
+		tput cuu1
+		tput cuf 23
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Inkscape cannot be Installed."
+		tput setaf 3
+		echo "Installing Inkscape..."
+		tput cuu1
+		tput cuf 23
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
 mkdir -p fia_temp
 cd fia_temp
 sudo whoami >>/dev/null
@@ -394,13 +469,13 @@ for choice in $choices; do
 		install_vlc
 		;;
 	10)
-		echo "gparted"
+		install_gparted
 		;;
 	11)
-		echo "gimp"
+		install_gimp
 		;;
 	12)
-		echo "inkscape"
+		install_inkscape
 		;;
 	esac
 done
