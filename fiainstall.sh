@@ -15,11 +15,6 @@ options=(
 	12 "Inkscape" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
-mkdir -p fia_temp
-cd fia_temp
-sudo whoami >>/dev/null
-clear
-
 checknet() {
 	tput setaf 3
 	echo "Checking Internet connectivity..."
@@ -35,6 +30,52 @@ checknet() {
 		echo "[No Internet. Exiting!]"
 		tput sgr0
 		exit
+	fi
+}
+
+check_snap() {
+	tput setaf 3
+	echo "Checking Snap..."
+	command -v snap &> /dev/null
+	if [[ $? -eq 0 ]]; then
+		tput cuu1
+		tput cuf 17
+		tput setaf 2
+		echo "[OK!]"
+		tput sgr0
+		return
+	else
+		tput setaf 1
+		echo "[No Snap Found!]"
+		tput sgr0
+		echo "Install Snap(y/n)?"
+		read snap_choice
+		if [[ $snap_choice =~ ^[Yy]$ ]]; then
+			tput setaf 3
+			echo "Installing Snap..."
+			sudo apt update && sudo apt install snapd
+			if [[ $? -eq 0 ]]; then
+				tput setaf 3
+				echo "Installing Snap..."
+				tput cuu1
+				tput cuf 19
+				tput setaf 2
+				echo "[Done!]"
+				return
+			else
+				tput setaf 3
+				echo "Installing Snap..."
+				tput cuu1
+				tput cuf 19
+				tput setaf 1
+				echo "[Failed!]"
+				exit
+			fi
+		else
+			tput setaf 3
+			echo "Aborted!"
+			exit
+		fi
 	fi
 }
 
@@ -236,7 +277,38 @@ install_atom() {
 	fi
 }
 
+install_vscode() {
+	tput setaf 3
+	echo "Installing VSCode..."
+	sudo snap install code --classic
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing VSCode..."
+		tput cuu1
+		tput cuf 21
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "VSCode cannot be Installed."
+		tput setaf 3
+		echo "Installing VSCode..."
+		tput cuu1
+		tput cuf 21
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
+mkdir -p fia_temp
+cd fia_temp
+sudo whoami >>/dev/null
+clear
+
 checknet
+check_snap
 update
 
 for choice in $choices; do
@@ -260,7 +332,7 @@ for choice in $choices; do
 		install_atom
 		;;
 	7)
-		echo "ms code"
+		install_code
 		;;
 	8)
 		echo "anydesk"
