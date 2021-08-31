@@ -302,6 +302,34 @@ install_vscode() {
 	fi
 }
 
+install_anydesk() {
+	tput setaf 3
+	echo "Installing Anydesk..."
+	sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list >>/dev/null
+	wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+	sudo apt update
+	sudo apt install anydesk
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Anydesk..."
+		tput cuu1
+		tput cuf 25
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Anydesk cannot be installed."
+		tput setaf 3
+		echo "Installing Anydesk..."
+		tput cuu1
+		tput cuf 28
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
 mkdir -p fia_temp
 cd fia_temp
 sudo whoami >>/dev/null
@@ -335,7 +363,7 @@ for choice in $choices; do
 		install_code
 		;;
 	8)
-		echo "anydesk"
+		install_anydesk
 		;;
 	9)
 		echo "vlc player"
