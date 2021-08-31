@@ -162,6 +162,31 @@ install_chrome() {
 	fi
 }
 
+install_filezilla() {
+	tput setaf 3
+	echo "Installing Filezilla..."
+	sudo apt install filezilla
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing Filezilla..."
+		tput cuu1
+		tput cuf 24
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "Filezilla cannot be Installed."
+		tput setaf 3
+		echo "Installing Filezilla..."
+		tput cuu1
+		tput cuf 24
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
 checknet
 update
 
@@ -177,7 +202,7 @@ for choice in $choices; do
 		install_chrome
 		;;
 	4)
-		echo "filezilla"
+		install_filezilla
 		;;
 	5)
 		echo "git"
