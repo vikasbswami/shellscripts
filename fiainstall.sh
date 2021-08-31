@@ -313,7 +313,7 @@ install_anydesk() {
 		tput setaf 3
 		echo "Installing Anydesk..."
 		tput cuu1
-		tput cuf 25
+		tput cuf 22
 		tput setaf 2
 		echo "[Done!]"
 		return		
@@ -323,7 +323,32 @@ install_anydesk() {
 		tput setaf 3
 		echo "Installing Anydesk..."
 		tput cuu1
-		tput cuf 28
+		tput cuf 22
+		tput setaf 1
+		echo "[Failed.]"
+		return
+	fi
+}
+
+install_vlc() {
+	tput setaf 3
+	echo "Installing VLC Player..."
+	sudo apt install vlc
+	if [[ $? -eq 0 ]]; then
+		tput setaf 3
+		echo "Installing VLC Player..."
+		tput cuu1
+		tput cuf 25
+		tput setaf 2
+		echo "[Done!]"
+		return		
+	else
+		tput setaf 1
+		echo "VLC Player cannot be Installed."
+		tput setaf 3
+		echo "Installing VLC Player..."
+		tput cuu1
+		tput cuf 25
 		tput setaf 1
 		echo "[Failed.]"
 		return
@@ -366,7 +391,7 @@ for choice in $choices; do
 		install_anydesk
 		;;
 	9)
-		echo "vlc player"
+		install_vlc
 		;;
 	10)
 		echo "gparted"
