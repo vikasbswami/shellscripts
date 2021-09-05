@@ -42,13 +42,11 @@ checknet() {
 		tput cuf 34
 		tput setaf 2
 		echo "[OK!]"
-		tput sgr0
 	else
 		tput cuu1
 		tput cuf 34
 		tput setaf 1
 		echo "[No Internet. Exiting!]"
-		tput sgr0
 		exit
 	fi
 }
@@ -111,7 +109,6 @@ update() {
 		tput cuf 21
 		tput setaf 2
 		echo "[Done!]"
-		tput sgr0
 	else
 		tput setaf 3
 		echo "Updating packages..."
@@ -119,7 +116,6 @@ update() {
 		tput cuf 21
 		tput setaf 1
 		echo "[Failed. Exiting!]"
-		tput sgr0
 		exit
 	fi
 }
@@ -127,6 +123,7 @@ update() {
 install_vmware() {
 	tput setaf 3
 	echo "Installing Linux headers..."
+	tput init
 	update
 	sudo apt install build-essential linux-headers-$(uname -r) -y
 	if [[ $? -ne 0 ]]; then
@@ -252,7 +249,8 @@ install_filezilla() {
 install_git() {
 	tput setaf 3
 	echo "Installing Git..."
-	sudo apt install git
+	tput init
+	sudo apt install -y git
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Git..."
@@ -277,6 +275,7 @@ install_git() {
 install_atom() {
 	tput setaf 3
 	echo "Installing Atom..."
+	tput init
 	sudo snap install atom --classic
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
@@ -302,6 +301,7 @@ install_atom() {
 install_vscode() {
 	tput setaf 3
 	echo "Installing VSCode..."
+	tput init
 	sudo snap install code --classic
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
@@ -327,10 +327,11 @@ install_vscode() {
 install_anydesk() {
 	tput setaf 3
 	echo "Installing Anydesk..."
+	tput init
 	sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list >>/dev/null
 	wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
 	sudo apt update
-	sudo apt install anydesk
+	sudo apt install -y anydesk
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Anydesk..."
@@ -355,7 +356,8 @@ install_anydesk() {
 install_vlc() {
 	tput setaf 3
 	echo "Installing VLC Player..."
-	sudo apt install vlc
+	tput init
+	sudo apt install -y vlc
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing VLC Player..."
@@ -380,7 +382,8 @@ install_vlc() {
 install_gparted() {
 	tput setaf 3
 	echo "Installing Gparted..."
-	sudo apt install gparted
+	tput init
+	sudo apt install -y gparted
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Gparted..."
@@ -405,7 +408,8 @@ install_gparted() {
 install_gimp() {
 	tput setaf 3
 	echo "Installing Gimp..."
-	sudo apt install gimp
+	tput init
+	sudo apt install -y gimp
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Gimp..."
@@ -430,7 +434,8 @@ install_gimp() {
 install_inkscape() {
 	tput setaf 3
 	echo "Installing Inkscape..."
-	sudo apt install inkscape
+	tput init
+	sudo apt install -y inkscape
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Inkscape..."
