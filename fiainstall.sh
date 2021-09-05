@@ -1,4 +1,16 @@
 #!/bin/bash
+####################################################################
+#  This script installs useful apps. Works well on Ubuntu 20.04 LTS 
+#  onwards. Might work on other debian based distros
+#
+#
+#
+#AUTHOR : Vikas Swami
+#COMPANY : Ubercore Data Labs Private Limted
+#WEBSITE : https://ubercore.company
+
+####################################################################
+
 cmd=(whiptail --separate-output --checklist "Select apps to install:\n(Use ARROWs, TAB, SPACE and ENTER keys)" 22 56 10)
 options=(
 	1 "VMWare Player" off
