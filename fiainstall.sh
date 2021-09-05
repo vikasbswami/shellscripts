@@ -226,7 +226,8 @@ install_chrome() {
 install_filezilla() {
 	tput setaf 3
 	echo "Installing Filezilla..."
-	sudo apt install filezilla
+	tput init
+	sudo apt install -y filezilla
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing Filezilla..."
