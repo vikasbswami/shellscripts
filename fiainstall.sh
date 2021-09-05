@@ -38,12 +38,14 @@ checknet() {
 	echo "Checking Internet connectivity..."
 	wget -q --tries=10 --timeout=20 -O - http://google.com >>/dev/null
 	if [[ $? -eq 0 ]]; then
-		tput cup 0 34
+		tput cuu1
+		tput cuf 34
 		tput setaf 2
 		echo "[OK!]"
 		tput sgr0
 	else
-		tput cup 0 34
+		tput cuu1
+		tput cuf 34
 		tput setaf 1
 		echo "[No Internet. Exiting!]"
 		tput sgr0
@@ -170,7 +172,7 @@ install_virtualbox() {
 	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 	sudo apt update
-	sudo apt install virtualbox-6.1
+	sudo apt install -y virtualbox-6.1
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
 		echo "Installing VirtualBox..."
