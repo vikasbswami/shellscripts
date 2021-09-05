@@ -98,13 +98,13 @@ check_snap() {
 }
 
 update() {
-	tput cup 1 0
 	tput setaf 3
 	echo "Updating packages..."
+	tput sgr0
 	sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
-		echo "Updating packages..."
+		#echo "Updating packages..."
 		tput cuu1
 		tput cuf 21
 		tput setaf 2
