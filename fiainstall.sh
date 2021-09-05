@@ -487,7 +487,7 @@ for choice in $choices; do
 		install_atom
 		;;
 	7)
-		install_code
+		install_vscode
 		;;
 	8)
 		install_anydesk
