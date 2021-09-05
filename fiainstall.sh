@@ -106,7 +106,7 @@ update() {
 	sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y
 	if [[ $? -eq 0 ]]; then
 		tput setaf 3
-		#echo "Updating packages..."
+		echo "Updating packages..."
 		tput cuu1
 		tput cuf 21
 		tput setaf 2
@@ -141,7 +141,7 @@ install_vmware() {
 	fi
 	tput setaf 3
 	echo "Downloading VMWare Player..."
-	wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://www.vmware.com/go/getplayer-linux
+	wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" -c https://www.vmware.com/go/getplayer-linux
 	if [[ $? -eq 0 ]]; then
 		chmod +x getplayer-linux
 		sudo ./getplayer-linux --required --eulas-agreed
@@ -198,7 +198,7 @@ install_chrome() {
 	tput setaf 3
 	echo "Downloading Google Chrome..."
 	tput init
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	if [[ $? -eq 0 ]]; then
 		sudo dpkg -i google-chrome-stable_current_amd64.deb
 		sudo apt update && sudo apt install -f
