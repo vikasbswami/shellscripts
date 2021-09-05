@@ -15,6 +15,12 @@ options=(
 	12 "Inkscape" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
+if [[ $? = 1 ]]; then
+	tput setaf 3
+	echo "Cancelling..."
+	exit
+fi
+
 checknet() {
 	tput setaf 3
 	echo "Checking Internet connectivity..."
