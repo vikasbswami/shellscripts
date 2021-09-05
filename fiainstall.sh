@@ -125,7 +125,8 @@ update() {
 }
 
 install_vmware() {
-	echo "Installing VMWare Player..."
+	tput setaf 3
+	echo "Installing Linux headers..."
 	update
 	sudo apt install build-essential linux-headers-$(uname -r) -y
 	if [[ $? -ne 0 ]]; then
