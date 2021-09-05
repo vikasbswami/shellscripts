@@ -479,3 +479,15 @@ for choice in $choices; do
 		;;
 	esac
 done
+
+cd ..
+tput setaf 3
+echo "Removing temporary files..."
+rm -r fia_temp
+tput cuu1
+tput cuf 28
+tput setaf 2
+echo "[Done!]"
+tput setaf 3
+echo "Installation finished. Script will exit now..."
+sleep 3
