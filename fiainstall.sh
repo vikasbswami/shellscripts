@@ -329,7 +329,7 @@ install_anydesk() {
 	echo "Installing Anydesk..."
 	tput init
 	sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list >>/dev/null
-	wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+	wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 	sudo apt update
 	sudo apt install -y anydesk
 	if [[ $? -eq 0 ]]; then
